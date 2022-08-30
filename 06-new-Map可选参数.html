@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js"></script>
+    <link
+      href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        width: 100%;
+
+        position: absolute;
+        top: 0;
+        bottom: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      mapboxgl.accessToken =
+        'pk.eyJ1Ijoic2gxLTUiLCJhIjoiY2w2ajBzNmt6MHk5dTNjbjUzZmR3MDZiOSJ9.iQVWIC-2Za8W59B1MNPbfA'
+      const map = new mapboxgl.Map({
+        container: 'map', // 渲染的html元素
+        style: 'mapbox://styles/mapbox/streets-v11', // 采用mapbox预设样式
+        center: [114.93, 25.83], // 江西赣州经纬度
+        zoom: 12, // 初始化缩放级别
+        minZoom: 11, // 最小缩放级别
+        maxZoom: 15, // 最大缩放级别
+        bearing: 20, // 旋转角
+        pitch: 60 // 倾角
+      })
+    </script>
+  </body>
+</html>
