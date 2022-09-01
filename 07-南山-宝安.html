@@ -40,8 +40,8 @@
           layers: [],
           glyphs: 'mapbox://fonts/mapbox/{fontstack}/{range}.pbf'
         },
-        center: [116, 32],
-        zoom: 3
+        center: [114, 22.55],
+        zoom: 9
       })
 
       // 使用语言插件设置中文
@@ -76,18 +76,28 @@
           source: 'esriBlueMap'
         })
 
-        // 获取中国地图的geojson
-        axios('./china_border.json').then(({ data }) => {
-          map.addSource('china_border', {
+        // 获取南山区的geojson
+        axios('./nanshan_fill.json').then(({ data }) => {
+          map.addSource('nanshan_fill', {
             type: 'geojson',
             data
           })
 
+          // 填充颜色
+          map.addLayer({
+            id: 'nanshan_fill',
+            type: 'fill',
+            source: 'nanshan_fill',
+            paint: {
+              'fill-color': 'green'
+            }
+          })
+
           // 添加边框
           map.addLayer({
-            id: 'china_border',
+            id: 'nanshan_border',
             type: 'line',
-            source: 'china_border',
+            source: 'nanshan_fill',
             layout: {
               'line-join': 'round',
               'line-cap': 'round'
@@ -95,15 +105,63 @@
             paint: {
               'line-opacity': 1,
               'line-width': 3,
-              'line-color': '#5df6ff'
+              'line-color': 'aqua'
             }
           })
 
           // 添加名字
           map.addLayer({
-            id: 'province',
+            id: 'nanshan_county',
             type: 'symbol',
-            source: 'china_border',
+            source: 'nanshan_fill',
+            layout: {
+              'text-field': '{name}',
+              'text-size': 14
+            },
+            paint: {
+              'text-color': '#fff'
+            }
+          })
+        })
+
+        // 获取宝安区的geojson
+        axios('./baoan_fill.json').then(({ data }) => {
+          map.addSource('baoan_fill', {
+            type: 'geojson',
+            data
+          })
+
+          // 填充颜色
+          map.addLayer({
+            id: 'baoan_fill',
+            type: 'fill',
+            source: 'baoan_fill',
+            paint: {
+              'fill-color': 'red'
+            }
+          })
+
+          // 添加边框
+          map.addLayer({
+            id: 'baoan_border',
+            type: 'line',
+            source: 'baoan_fill',
+            layout: {
+              'line-join': 'round',
+              'line-cap': 'round'
+            },
+            paint: {
+              'line-opacity': 1,
+              'line-width': 3,
+              'line-color': 'yellow'
+            }
+          })
+
+          // 添加名字
+          map.addLayer({
+            id: 'baoan_county',
+            type: 'symbol',
+            source: 'baoan_fill',
             layout: {
               'text-field': '{name}',
               'text-size': 14
